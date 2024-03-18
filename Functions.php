@@ -18,7 +18,7 @@ class Database
 }
 
 $newDB = new Database();
-$result = $newDB->query("SELECT * FROM books WHERE id = 1"); 
+$result = $newDB->query("SELECT * FROM books"); 
 
 print_r($result);
 ?>
