@@ -64,12 +64,16 @@ class Database
     }
     public function query($query)
     {
-        $statement = $this->connection->prepare($query);
+        $statement = $$this->connection->prepare($query);
         $statement->execute();
 
-        return $statement->fetchAll();
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
 }
+
+$newQuery = new Database(); 
+$newQuery->query("SELECT * FROM"); 
+
 
 ?>
 
