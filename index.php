@@ -1,7 +1,7 @@
 <?php
 
 //database connection file
-require 'conn.php';
+// require 'conn.php';
 
 ?>
 <!DOCTYPE html>
