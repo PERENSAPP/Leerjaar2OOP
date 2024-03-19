@@ -5,7 +5,7 @@ class Database
     public $connection;
     public function __construct()
     {
-        $dsn = "mysql:host=localhost;dbname=testdb;user=root;";
+        $dsn = "mysql:host=localhost;dbname=testdb;";
         $this->connection = new PDO($dsn);
     }
     public function query($query)
@@ -21,4 +21,3 @@ $newDB = new Database();
 $result = $newDB->query("SELECT * FROM books"); 
 
 print_r($result);
-?>
