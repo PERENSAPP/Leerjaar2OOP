@@ -1,5 +1,6 @@
 <?php
-require "conn.php";
+
+
 class Database
 {
     public $connection;
