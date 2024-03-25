@@ -1,44 +1,69 @@
 <?php
 session_start();
-require_once "conn.php";
-
-// here we retrieve the typed data and store it in a variable
+// Retrieve data from POST request
 $username = strip_tags($_POST["username"]);
 $email = strip_tags($_POST["email"]);
 $password = strip_tags($_POST["password"]);
 $dob = strip_tags($_POST["dob"]);
 
-$_SESSION["logged_in_user"] = $username;
-$_SESSION["email"] = $email;
-//----------------------------------------------------- 
+class Database
+{
+    public $connection;
+    public function __construct()
+    {
+        $dsn = "mysql:host=localhost;dbname=testdb;";
+        $this->connection = new PDO($dsn);
+    }
+    public function query($query, $params = [])
+    {
+        $statement = $this->connection->prepare($query);
+        $statement->execute($params);
+
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+    }
+}
+
+class Signup extends Database
+{
+    public function __construct()
+    {
+        parent::__construct(); // Call the parent class constructor
+    }
+    public function checkEmailExists($email)
+    {
+        $sql = "SELECT COUNT(*) AANTAL FROM account WHERE email = :email";
+        $result = $this->query($sql, [':email' => $email]);
+        return $result[0]['AANTAL'];
+    }
+
+    public function registerUser($name, $surname, $email, $password)
+    {
+        $hashed_password = password_hash($password, PASSWORD_BCRYPT, ['cost' => 11]);
+        $sql = "INSERT INTO account(name, surename, email, password) VALUES(:name, :surname, :email, :password)";
+        $params = [
+            ':name' => $name,
+            ':surname' => $surname,
+            ':email' => $email,
+            ':password' => $hashed_password
+        ];
+        $this->query($sql, $params);
+    }
+}
 
 
-// preparation and execution to check if the email already exists
-$sql = "SELECT COUNT(*) AANTAL FROM account WHERE email = :un";
-$stmt = $conn->prepare($sql);
-$stmt->execute(["un" => $_POST['email']]);
-$aantal = $stmt->fetchColumn();
-//-----------------------------------------------------
+// Create instance of Signup class
+$signup = new Signup();
 
-// checks if the account already exists
+// Check if email already exists
+$aantal = $signup->checkEmailExists($email);
+
 if ($aantal == 1) {
     header("location: retry_register.php");
+    exit();
 } else {
-    // this is to put the typed data into the database >>> Note the $hashed_password to better understand the encryption
-    $stmt = $conn->prepare("INSERT INTO account(username, email, password, dob) VALUES(:username, :email, :password, :dob)");
-    $stmt->bindParam(":username", $username);
-    $stmt->bindParam(":email", $email);
-    $stmt->bindParam(":password", $hashed_password);
-    $stmt->bindParam(":dob", $dob);
-    //----------------------------------------------------- 
-
-    //for better encryption// // cost 12 = default encryption //
-    $password_difficulty = ['difficulty' => 11];
-    $hashed_password = password_hash($password, PASSWORD_BCRYPT, $password_difficulty);
-    $stmt->execute();
+    // Register user
+    $signup->registerUser($username, $email, $password, $dob);
     header("Location: logged_in_user.php");
     exit();
 }
-;
-//-----------------------------------------------------
 ?>
