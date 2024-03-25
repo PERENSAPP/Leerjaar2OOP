@@ -24,12 +24,14 @@
         <div class="span4">...</div>
         <div class="span4">...</div>
         <div class="span4">...</div>
+        <div class="span4">...</div>
+
     </div>
-    <section class="vh-100">
+    <section>
         <div class="container-fluid h-custom">
             <div class="row d-flex justify-content-center align-items-center h-100">
                 <div class="col-md-9 col-lg-6 col-xl-5">
-                    <img src="Pictures/school1.png" width="400" height="400" class="img-fluid" alt="Sample image">
+                    <img src="Pictures/school1.png" width="393" height="393" class="img-fluid" alt="Sample image">
                 </div>
                 <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
                     <form>
@@ -72,7 +74,6 @@
             </div>
         </div>
         <div class="row spacer text-light">
-            <div class="span4">...</div>
             <div class="span4">...</div>
             <div class="span4">...</div>
             <div class="span4">...</div>

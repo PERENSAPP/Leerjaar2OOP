@@ -48,7 +48,8 @@
             <div class="row g-0">
                 <div class="col-md-8">
                     <div class="card-body">
-                        <h5 class="card-title">Welkom: @username</h5>
+                        <h5 class="card-title">Welkom: <?php echo $_SESSION["username"]; ?>
+                         </h5>
                         <p class="card-text">Op school zijn er soms studenten die vanwege financiële redenen geen
                             schoolboeken kunnen aanschaffen, op deze website kunt u boeken gratis reserveren op kosten
                             van school</p>
