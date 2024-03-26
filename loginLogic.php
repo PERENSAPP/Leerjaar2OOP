@@ -27,11 +27,11 @@ class LoginLogic {
 
         if (password_verify($password, $hashed_password)) {
             // If the password is correct 
-            // $_SESSION["logged_in_user"] = $username;
-            // $_SESSION["username"] = $username;
-            // $_SESSION["id"] = $id;
-            // $_SESSION["email"] = $email;
-            header("location: logged_in_user.php"); // fix this
+            $_SESSION["logged_in_user"] = $username;
+            $_SESSION["username"] = $username;
+            $_SESSION["id"] = $id;
+            $_SESSION["email"] = $email;
+            header("location: logged_in_user.php");
             exit;
         } else {
             // This is if the typed in password is incorrect

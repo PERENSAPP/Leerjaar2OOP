@@ -31,9 +31,12 @@
         <div class="container-fluid h-custom">
             <div class="row d-flex justify-content-center align-items-center h-100">
                 <div class="col-md-9 col-lg-6 col-xl-5">
-                    <img src="Pictures/school1.png" width="393" height="393" class="img-fluid" alt="">
+                    <img src="Pictures/school1.png" width="393" height="393" class="img-fluid" alt="Sample image">
                 </div>
                 <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+                    <div class="alert alert-danger" role="alert">
+                        Email of wachtwoord is onjuist, probeer het opnieuw.
+                    </div>
                     <form>
                         <!-- Email input -->
                         <div class="form-outline mb-4">
@@ -51,12 +54,12 @@
 
                         </div>
 
-                        
+
 
                         <div class="text-center text-lg-start mt-4 pt-2">
                             <button type="button" class="btn btn-primary btn-lg"
                                 style="padding-left: 2.5rem; padding-right: 2.5rem;">Login</button>
-                            <p class="small fw-bold mt-2 pt-1 mb-0">Heb je geen account? <a href="signUp.php"
+                            <p class="small fw-bold mt-2 pt-1 mb-0">Heb je geen account? <a href="register.php"
                                     class="link-primary">Registreren</a></p>
                         </div>
 
