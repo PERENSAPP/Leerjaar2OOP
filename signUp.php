@@ -38,7 +38,7 @@
                     <img src="Pictures/school1.png" width="393" height="393" class="img-fluid" alt="Sample image">
                 </div>
                 <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
-                    <form method="post"action="signUpLogic.php">
+                    <form action="signUpLogic.php" method="post">
                         <!-- Name / surname  -->
                         <div class="row">
                             <!-- Name -->
@@ -60,7 +60,6 @@
                             <label class="form-label" for="form3Example4">Email</label>
                             <input type="email" id="form3Example4" class="form-control form-control-lg"
                                 placeholder="Voer je E-mail in" name="email" />
-
                         </div>
                         <!-- Password input -->
                         <div class="form-outline mb-3">
@@ -69,16 +68,12 @@
                                 placeholder="Voer je wachtwoord in" name="password" />
 
                         </div>
-
-
-
                         <div class="text-center text-lg-start mt-4 pt-2">
-                            <button type="button" class="btn btn-primary btn-lg"
+                            <button type="submit" class="btn btn-primary btn-lg"
                                 style="padding-left: 2.5rem; padding-right: 2.5rem;">Login</button>
                             <p class="small fw-bold mt-2 pt-1 mb-0">Heb je geen account? <a href="register.php"
                                     class="link-primary">Registreren</a></p>
                         </div>
-
                     </form>
                 </div>
             </div>

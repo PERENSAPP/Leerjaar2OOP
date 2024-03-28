@@ -34,11 +34,11 @@
                     <img src="Pictures/school1.png" width="393" height="393" class="img-fluid" alt="Sample image">
                 </div>
                 <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
-                    <form>
+                    <form action="loginLogic.php" method="post">
                         <!-- Email input -->
                         <div class="form-outline mb-4">
                             <label class="form-label" for="form3Example3">Email</label>
-                            <input type="email" id="form3Example3" class="form-control form-control-lg"
+                            <input type="email" id="form3Example3" name="email" class="form-control form-control-lg"
                                 placeholder="Voer je studenten mail in" />
 
                         </div>
@@ -46,15 +46,14 @@
                         <!-- Password input -->
                         <div class="form-outline mb-3">
                             <label class="form-label" for="form3Example4">Wachtwoord</label>
-                            <input type="password" id="form3Example4" class="form-control form-control-lg"
+                            <input type="password" id="form3Example4" name="password" class="form-control form-control-lg"
                                 placeholder="Voer je wachtwoord in" />
 
                         </div>
 
-                        
 
                         <div class="text-center text-lg-start mt-4 pt-2">
-                            <button type="button" class="btn btn-primary btn-lg"
+                            <button type="submit" class="btn btn-primary btn-lg"
                                 style="padding-left: 2.5rem; padding-right: 2.5rem;">Login</button>
                             <p class="small fw-bold mt-2 pt-1 mb-0">Heb je geen account? <a href="register.php"
                                     class="link-primary">Registreren</a></p>

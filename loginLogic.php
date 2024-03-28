@@ -21,9 +21,7 @@ class LoginLogic {
         }
 
         $hashed_password = $data->password;
-        $username = $data->username;
         $email = $data->email;
-        $id = $data->id;
 
         if (password_verify($password, $hashed_password)) {
             // If the password is correct 
@@ -43,7 +41,6 @@ class LoginLogic {
 
 $email = strip_tags($_POST["email"]);
 $password = strip_tags($_POST["password"]);
-
 $loginLogic = new LoginLogic($conn);
 $loginLogic->login($email, $password);
 ?>
