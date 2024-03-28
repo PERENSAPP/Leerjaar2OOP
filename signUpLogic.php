@@ -1,68 +1,96 @@
 <?php
 session_start();
-// Retrieve data from POST request
-$username = strip_tags($_POST["username"]);
-$email = strip_tags($_POST["email"]);
-$password = strip_tags($_POST["password"]);
-$dob = strip_tags($_POST["dob"]);
-
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
 class Database
 {
-    public $connection;
+    private $connection;
     public function __construct()
     {
-        $dsn = "mysql:host=localhost;dbname=testdb;";
-        $this->connection = new PDO($dsn);
+        $dsn = "mysql:host=localhost;dbname=evke_books;";
+        $username = "root";
+        $password = "";
+        try {
+            $this->connection = new PDO($dsn, $username, $password);
+            $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        } catch (PDOException $e) {
+            echo "Connection failed: " . $e->getMessage();
+            exit();
+        }
     }
     public function query($query, $params = [])
     {
-        $statement = $this->connection->prepare($query);
-        $statement->execute($params);
-
-        return $statement->fetchAll(PDO::FETCH_ASSOC);
+        try {
+            $statement = $this->connection->prepare($query);
+            $statement->execute($params);
+            return $statement->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            echo "Query failed: " . $e->getMessage();
+            exit();
+        }
     }
 }
-
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
 class Signup extends Database
 {
+    // #1
     public function __construct()
     {
         parent::__construct(); // Call the parent class constructor
     }
+    // #2 
     public function checkEmailExists($email)
     {
-        $sql = "SELECT COUNT(*) AANTAL FROM account WHERE email = :email";
+        $sql = "SELECT COUNT(*) AS AANTAL FROM account WHERE email = :email";
         $result = $this->query($sql, [':email' => $email]);
         return $result[0]['AANTAL'];
     }
-
+    // #3
     public function registerUser($name, $surname, $email, $password)
     {
-        $hashed_password = password_hash($password, PASSWORD_BCRYPT, ['cost' => 11]);
-        $sql = "INSERT INTO account(name, surename, email, password) VALUES(:name, :surname, :email, :password)";
-        $params = [
-            ':name' => $name,
-            ':surname' => $surname,
-            ':email' => $email,
-            ':password' => $hashed_password
-        ];
-        $this->query($sql, $params);
+        // Check if the email ends with "@tcrmbo.nl" or "@student.zadkine.nl"
+        if (!preg_match('/(@tcrmbo\.nl$)|(@student\.zadkine\.nl$)/', $email)) {
+            // Redirect the user or display an error message ________ ADD retry page or another way to redirect people
+            header("location: invalid_email.php");
+            exit();
+        } else {
+            $hashed_password = password_hash($password, PASSWORD_BCRYPT, ['cost' => 11]);
+            $studentRoleId = 2; // default id 2
+
+            $sql = "INSERT INTO account(name, surname, email, password, role_idrole) VALUES(:name, :surname, :email, :password, :role_idrole)";
+            $params = [
+                ':name' => $name,
+                ':surname' => $surname,
+                ':email' => $email,
+                ':password' => $hashed_password,
+                ':role_idrole' => $studentRoleId // Assign the default role ID of a student
+            ];
+            $this->query($sql, $params);
+        }
+    }
+    // #4 
+    private function validateEmail($email)
+    {
+        return filter_var($email, FILTER_VALIDATE_EMAIL) && preg_match('/@tcrmbo\.nl$/', $email);
     }
 }
-
-
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Retrieve data from POST request
+$name = strip_tags($_POST["name"]);
+$surname = strip_tags($_POST["surname"]);
+$email = strip_tags($_POST["email"]);
+$password = strip_tags($_POST["password"]);
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Create instance of Signup class
 $signup = new Signup();
-
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Check if email already exists
 $aantal = $signup->checkEmailExists($email);
-
 if ($aantal == 1) {
     header("location: retry_register.php");
     exit();
 } else {
     // Register user
-    $signup->registerUser($username, $email, $password, $dob);
+    $signup->registerUser($name, $surname, $email, $password);
     header("Location: logged_in_user.php");
     exit();
 }
