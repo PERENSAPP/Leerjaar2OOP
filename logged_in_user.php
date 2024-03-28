@@ -18,20 +18,32 @@ require_once "conn.php";
 </head>
 
 <body>
-    <nav class="navbar bg-dark">
+    <nav class="navbar navbar-expand-lg bg-dark text-light">
         <div class="container-fluid">
             <a class="navbar-brand">
-                <img src="Pictures/logo2.png" alt="" width="70" height="50" class="d-inline-block align-text-top"
-                    href="index.php">
+                <img src="Pictures/logo2.png" alt="" width="70" height="50" class="d-inline-block align-text-top">
             </a>
+            <div class="collapse navbar-collapse " id="navbarNavDropdown">
+                <ul class="navbar-nav text-body-light">
+                    <li class="nav-item">
+                        <a class="nav-link" href="bookArchive.php">Boeken</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="createBooks.php">Boeken toevoegen</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="login.php">log uit</a>
+                    </li>
 
-            <form class="d-flex" role="search">
-                <input class="form-control me-2" type="search" placeholder="Zoeken" aria-label="Search">
-                <button class="btn btn-outline-light" type="submit">Zoek</button>
-
-            </form>
-
+                </ul>
+            </div>
         </div>
+        <form class="d-flex" role="search">
+
+            <input class="form-control me-2" type="search" placeholder="Zoeken" aria-label="Search">
+            <button class="btn btn-outline-light" type="submit">Zoek</button>
+
+        </form>
     </nav>
 
     <div class="row spacer text-light">
@@ -48,7 +60,7 @@ require_once "conn.php";
                 <div class="col-md-8">
                     <div class="card-body">
                         <h5 class="card-title">Welkom: <?php echo $_SESSION["name"] . " " . $_SESSION["surname"];?>
-                         </h5>
+                        </h5>
                         <p class="card-text">Op school zijn er soms studenten die vanwege financiële redenen geen
                             schoolboeken kunnen aanschaffen, op deze website kunt u boeken gratis reserveren op kosten
                             van school</p>
@@ -125,7 +137,7 @@ require_once "conn.php";
     <div class="row spacer text-light">
         <div class="span4">...</div>
         <div class="span4">...</div>
-        
+
     </div>
 
 
