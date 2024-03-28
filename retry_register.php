@@ -10,7 +10,7 @@
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
-        </script>
+    </script>
     <title>sign up</title>
 </head>
 
@@ -28,8 +28,6 @@
         <div class="span4">...</div>
         <div class="span4">...</div>
         <div class="span4">...</div>
-        <div class="span4">...</div>
-        
 
     </div>
     <section>
@@ -39,6 +37,9 @@
                     <img src="Pictures/school1.png" width="393" height="393" class="img-fluid" alt="Sample image">
                 </div>
                 <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+                    <div class="alert alert-danger" role="alert">
+                        Email bestaat al of is niet goed! probeer opnieuw (alleen studenten E-mail toegestaan).
+                    </div>
                     <form action="signUpLogic.php" method="post">
                         <!-- Name / surname  -->
                         <div class="row">
@@ -72,7 +73,6 @@
                         <div class="text-center text-lg-start mt-4 pt-2">
                             <button type="submit" class="btn btn-primary btn-lg"
                                 style="padding-left: 2.5rem; padding-right: 2.5rem;">Login</button>
-                            
                         </div>
                     </form>
                 </div>

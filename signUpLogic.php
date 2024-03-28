@@ -50,7 +50,7 @@ class Signup extends Database
         // Check if the email ends with "@tcrmbo.nl" or "@student.zadkine.nl"
         if (!preg_match('/(@tcrmbo\.nl$)|(@student\.zadkine\.nl$)/', $email)) {
             // Redirect the user or display an error message ________ ADD retry page or another way to redirect people
-            header("location: invalid_email.php");
+            header("location: retry_register.php");
             exit();
         } else {
             $hashed_password = password_hash($password, PASSWORD_BCRYPT, ['cost' => 11]);
