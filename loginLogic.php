@@ -2,7 +2,7 @@
 session_start();
 require_once "conn.php";
 
-class LoginLogic {
+class LoginLogic{
     private $conn;
 
     public function __construct($conn) {
@@ -22,15 +22,16 @@ class LoginLogic {
 
         $hashed_password = $data->password;
         $email = $data->email;
+        $name = $data->name;
+        $surname = $data->surname; 
+    
 
         if (password_verify($password, $hashed_password)) {
             // If the password is correct 
-            // $_SESSION["logged_in_user"] = $username;
-            // $_SESSION["username"] = $username;
-            // $_SESSION["id"] = $id;
-            // $_SESSION["email"] = $email;
+            $_SESSION["name"] = $name;
+            $_SESSION["surname"] = $surname;
             header("location: logged_in_user.php"); // fix this
-            exit;
+            exit;   
         } else {
             // This is if the typed in password is incorrect
             header("location: retry_login.php"); // fix this
