@@ -1,7 +1,6 @@
 <?php
-
-//database connection file
-// require 'conn.php';
+session_start();
+require_once "conn.php";
 
 ?>
 <!DOCTYPE html>
@@ -48,7 +47,7 @@
             <div class="row g-0">
                 <div class="col-md-8">
                     <div class="card-body">
-                        <h5 class="card-title">Welkom: <?php echo $_SESSION["username"]; ?>
+                        <h5 class="card-title">Welkom: <?php echo $_SESSION["name"] . " " . $_SESSION["surname"];?>
                          </h5>
                         <p class="card-text">Op school zijn er soms studenten die vanwege financiële redenen geen
                             schoolboeken kunnen aanschaffen, op deze website kunt u boeken gratis reserveren op kosten
