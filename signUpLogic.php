@@ -54,15 +54,22 @@ class Signup extends Database
             exit();
         } else {
             $hashed_password = password_hash($password, PASSWORD_BCRYPT, ['cost' => 11]);
-            $studentRoleId = 2; // default id 2
-
+            
+            // Set the default role ID
+            $role_idrole = 2; // Default ID for student
+        
+            // Check if the email is from tcrmbo.nl domain and set role ID accordingly
+            if (preg_match('/@tcrmbo\.nl$/', $email)) {
+                $role_idrole = 1; // Set ID for tcrmbo.nl users
+            }
+        
             $sql = "INSERT INTO account(name, surname, email, password, role_idrole) VALUES(:name, :surname, :email, :password, :role_idrole)";
             $params = [
                 ':name' => $name,
                 ':surname' => $surname,
                 ':email' => $email,
                 ':password' => $hashed_password,
-                ':role_idrole' => $studentRoleId // Assign the default role ID of a student
+                ':role_idrole' => $role_idrole // Assign the appropriate role ID
             ];
             $this->query($sql, $params);
         }
