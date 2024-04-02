@@ -28,7 +28,7 @@
                         <a class="nav-link text-light" href="createBooks.php">Boeken toevoegen</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-light" href="login.php">log uit</a>
+                        <a class="nav-link text-light" href="logOut.php">log uit</a>
                     </li>
 
                 </ul>
@@ -51,7 +51,7 @@
 
             <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
                 <form action="createBooksLogic.php" method="post">
-                    <!-- Email input -->
+                    <!-- titel input -->
                     <div class="form-outline mb-4">
                         <label class="form-label" for="form3Example3">Titel</label>
                         <input type="text" id="form3Example3" name="bookName" class="form-control form-control-lg"
@@ -59,26 +59,28 @@
 
                     </div>
 
-                    <!-- Password input -->
+                    <!-- isbn input -->
                     <div class="form-outline mb-3">
                         <label class="form-label" for="form3Example4">ISBN</label>
                         <input type="text" id="form3Example4" name="ISBN" class="form-control form-control-lg"
                             placeholder="Voer het ISBN nummer in" />
 
                     </div>
+                    <!-- auteur input -->
                     <div class="form-outline mb-3">
                         <label class="form-label" for="form3Example4">Auteur</label>
                         <input type="text" id="form3Example4" name="nameAuthor" class="form-control form-control-lg"
                             placeholder="Voer de auteur in" />
 
                     </div>
+                    <!-- voorraad input -->
                     <div class="form-outline mb-3">
                         <label class="form-label" for="form3Example4">Voorraad</label>
                         <input type="number" id="form3Example4" name="stock" class="form-control form-control-lg"
                             placeholder="Voer het aantal boeken in" />
 
                     </div>
-
+                    <!-- img input -->
                     <div class="mb-3">
                         <label for="formFile" class="form-label"></label>
                         <input class="form-control" type="file" id="formFile" name="img">

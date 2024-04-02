@@ -24,7 +24,7 @@
                         <a class="nav-link text-light" href="createBooks.php">Boeken toevoegen</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-light" href="login.php">log uit</a>
+                        <a class="nav-link text-light" href="logOut.php">log uit</a>
                     </li>
 
                 </ul>
