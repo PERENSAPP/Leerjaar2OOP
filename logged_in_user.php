@@ -20,8 +20,9 @@ require_once "conn.php";
 <body>
     <nav class="navbar navbar-expand-lg bg-dark ">
         <div class="container-fluid">
-            <a class="navbar-brand">
-                <img src="Pictures/logo2.png" alt="" width="70" height="50" class="d-inline-block align-text-top">
+            <a class="navbar-brand" href="logged_in_user.php">
+                <img src="Pictures/logo2.png" alt="" width="70" height="50" class="d-inline-block align-text-top"
+                >
             </a>
             <div class="collapse navbar-collapse " id="navbarNavDropdown">
                 <ul class="navbar-nav text-light">

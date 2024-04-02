@@ -16,7 +16,7 @@
 <body>
     <nav class="navbar navbar-expand-lg bg-dark ">
         <div class="container-fluid">
-            <a class="navbar-brand">
+            <a class="navbar-brand" href="logged_in_user.php">
                 <img src="Pictures/logo2.png" alt="" width="70" height="50" class="d-inline-block align-text-top">
             </a>
             <div class="collapse navbar-collapse " id="navbarNavDropdown">
@@ -43,7 +43,8 @@
     </nav>
     <div class="row spacer text-light">
         <div class="span4">...</div>
-        <div class="span4">...</div>
+
+
     </div>
     <div class="container-fluid h-custom">
         <div class="row d-flex justify-content-center align-items-center h-100">
@@ -97,8 +98,8 @@
     </div>
     <div class="row spacer text-light">
         <div class="span4">...</div>
-        <div class="span4">...</div>
-        
+
+
     </div>
     <footer class="bg-dark text-center text-light">
         <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.05);">
