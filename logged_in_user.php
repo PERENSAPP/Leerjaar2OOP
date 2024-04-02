@@ -18,21 +18,21 @@ require_once "conn.php";
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg bg-dark text-light">
+    <nav class="navbar navbar-expand-lg bg-dark ">
         <div class="container-fluid">
             <a class="navbar-brand">
                 <img src="Pictures/logo2.png" alt="" width="70" height="50" class="d-inline-block align-text-top">
             </a>
             <div class="collapse navbar-collapse " id="navbarNavDropdown">
-                <ul class="navbar-nav text-body-light">
+                <ul class="navbar-nav text-light">
                     <li class="nav-item">
-                        <a class="nav-link" href="bookArchive.php">Boeken</a>
+                        <a class="nav-link text-light" href="bookArchive.php">Boeken</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="createBooks.php">Boeken toevoegen</a>
+                        <a class="nav-link text-light" href="createBooks.php">Boeken toevoegen</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="login.php">log uit</a>
+                        <a class="nav-link text-light" href="login.php">log uit</a>
                     </li>
 
                 </ul>
