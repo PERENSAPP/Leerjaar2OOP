@@ -16,7 +16,7 @@ class LoginLogic{
 
         if (!$data) {
             // User is not found
-            header("location: retry_login.php"); // fix this
+            header("location: retry_login.php"); 
             exit;
         }
 
@@ -30,11 +30,11 @@ class LoginLogic{
             // If the password is correct 
             $_SESSION["name"] = $name;
             $_SESSION["surname"] = $surname;
-            header("location: logged_in_user.php"); // fix this
+            header("location: logged_in_user.php"); 
             exit;   
         } else {
             // This is if the typed in password is incorrect
-            header("location: retry_login.php"); // fix this
+            header("location: retry_login.php"); 
             exit;
         }
     }
