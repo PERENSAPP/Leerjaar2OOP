@@ -98,6 +98,8 @@ if ($aantal == 1) {
 } else {
     // Register user
     $signup->registerUser($name, $surname, $email, $password);
+    $_SESSION["name"] = $name;
+    $_SESSION["surname"] = $surname;
     header("Location: logged_in_user.php");
     exit();
 }
