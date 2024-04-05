@@ -57,29 +57,29 @@
                     <div class="form-outline mb-4">
                         <label class="form-label" for="form3Example3">Titel</label>
                         <input type="text" id="form3Example3" name="bookName" class="form-control form-control-lg"
-                            placeholder="Voer de naam van het boek in" />
+                            placeholder="Voer de naam van het boek in" required/>
 
                     </div>
 
                     <!-- isbn input -->
                     <div class="form-outline mb-3">
-                        <label class="form-label" for="form3Example4">ISBN</label>
+                        <label class="form-label" for="form3Example4">ISBN (13 Cijfers)</label>
                         <input type="text" id="form3Example4" name="ISBN" class="form-control form-control-lg"
-                            placeholder="Voer het ISBN nummer in" />
+                            placeholder="Voer het ISBN nummer in" required/>
 
                     </div>
                     <!-- auteur input -->
                     <div class="form-outline mb-3">
                         <label class="form-label" for="form3Example4">Auteur</label>
                         <input type="text" id="form3Example4" name="nameAuthor" class="form-control form-control-lg"
-                            placeholder="Voer de auteur in" />
+                            placeholder="Voer de auteur in" required/>
 
                     </div>
                     <!-- voorraad input -->
                     <div class="form-outline mb-3">
                         <label class="form-label" for="form3Example4">Voorraad</label>
                         <input type="number" id="form3Example4" name="stock" class="form-control form-control-lg"
-                            placeholder="Voer het aantal boeken in" />
+                            placeholder="Voer het aantal boeken in" required/>
 
                     </div>
 

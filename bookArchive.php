@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Book Archive</title>
     <link href="src/style.css" rel="stylesheet">
@@ -9,8 +10,9 @@
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
     </script>
 </head>
+
 <body>
-<nav class="navbar navbar-expand-lg bg-dark ">
+    <nav class="navbar navbar-expand-lg bg-dark ">
         <div class="container-fluid">
             <a class="navbar-brand" href="logged_in_user.php">
                 <img src="Pictures/logo2.png" alt="" width="70" height="50" class="d-inline-block align-text-top">
@@ -44,6 +46,14 @@
     </div>
 
     
+    <div class="container text-center">  
+    <div class="row justify-content-start g-2 gap-3">
+        
+   <?php 
+   include 'bookArchiveLogic.php';
+   ?>
+    </div>
+    </div>
 
 
 
@@ -51,12 +61,12 @@
 
 
 
-    <footer class="bg-dark text-center text-light">
+    <!-- <footer class="bg-dark text-center text-light">
         <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.05);">
             © 2024 Copyright:
             <a class="text-light" href="https://github.com/PERENSAPP/Leerjaar2OOP">Evan&KevinInc.</a>
         </div>
-    </footer>
+    </footer> -->
 </body>
-</html>
 
+</html>
