@@ -1,14 +1,16 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <title>Bibliotheek</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="src/style.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
     </script>
+    <title>Boeken toevoegen</title>
 </head>
 
 <body>
@@ -42,39 +44,15 @@
 
         </form>
     </nav>
-    <div class="row spacer text-light">
-        <div class="span4">...</div>
-
-    </div>
-
-    <H1 class="text-center">Bibliotheek</H1>
-
-    <div class="row spacer text-light">
-        <div class="span4">...</div>
-        <div class="span4">...</div>
-
-    </div>
-    <div class="container text-center">
-        <div class="row justify-content-start g-2 gap-3">
-
-            <?php 
-   include 'bookArchiveLogic.php';
-   ?>
-        </div>
-    </div>
 
 
 
-
-
-
-
-    <!-- <footer class="bg-dark text-center text-light">
+    <footer class="bg-dark justify-content-between text-light">
         <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.05);">
             © 2024 Copyright:
             <a class="text-light" href="https://github.com/PERENSAPP/Leerjaar2OOP">Evan&KevinInc.</a>
         </div>
-    </footer> -->
+    </footer>
 </body>
 
 </html>

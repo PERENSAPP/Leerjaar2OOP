@@ -27,10 +27,13 @@ require_once "conn.php";
             <div class="collapse navbar-collapse " id="navbarNavDropdown">
                 <ul class="navbar-nav text-light">
                     <li class="nav-item">
-                        <a class="nav-link text-light" href="bookArchive.php">Boeken</a>
+                        <a class="nav-link text-light" href="bookArchive.php">Bibliotheek</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-light" href="createBooks.php">Boeken toevoegen</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-light" href="bookReservation.php"></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-light" href="logOut.php">log uit</a>
@@ -64,7 +67,7 @@ require_once "conn.php";
                         </h5>
                         <p class="card-text">Op school zijn er soms studenten die vanwege financiële redenen geen
                             schoolboeken kunnen aanschaffen, op deze website kunt u boeken gratis reserveren op kosten
-                            van school</p>
+                            van school.</p>
 
                     </div>
                 </div>
