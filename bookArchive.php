@@ -41,18 +41,23 @@
     </nav>
     <div class="row spacer text-light">
         <div class="span4">...</div>
-        <div class="span4">...</div>
-        <div class="span4">...</div>
+
     </div>
 
-    
-    <div class="container text-center">  
-    <div class="row justify-content-start g-2 gap-3">
-        
-   <?php 
+    <H1 class="text-center">Boeken</H1>
+
+    <div class="row spacer text-light">
+        <div class="span4">...</div>
+        <div class="span4">...</div>
+
+    </div>
+    <div class="container text-center">
+        <div class="row justify-content-start g-2 gap-3">
+
+            <?php 
    include 'bookArchiveLogic.php';
    ?>
-    </div>
+        </div>
     </div>
 
 

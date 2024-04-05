@@ -65,7 +65,7 @@
                     <div class="form-outline mb-3">
                         <label class="form-label" for="form3Example4">ISBN (13 Cijfers)</label>
                         <input type="text" id="form3Example4" name="ISBN" class="form-control form-control-lg"
-                            placeholder="Voer het ISBN nummer in" required/>
+                            placeholder="Voer het ISBN nummer in" maxlength="13" required/>
 
                     </div>
                     <!-- auteur input -->
