@@ -37,6 +37,20 @@
 
         </form>
     </nav>
+    <div class="row spacer text-light">
+        <div class="span4">...</div>
+        <div class="span4">...</div>
+        <div class="span4">...</div>
+    </div>
+
+    
+
+
+
+
+
+
+
     <footer class="bg-dark text-center text-light">
         <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.05);">
             © 2024 Copyright:

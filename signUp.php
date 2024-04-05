@@ -46,27 +46,27 @@
                             <div class="col-md-6 mb-4">
                                 <label class="form-label" for="form3Example1">Name</label>
                                 <input type="text" id="form3Example1" class="form-control form-control-lg"
-                                    placeholder="Enter your name" name="name">
+                                    placeholder="Enter your name" name="name" required>
                             </div>
 
                             <!-- Surname -->
                             <div class="col-md-6 mb-4">
                                 <label class="form-label" for="form3Example2">Surname</label>
                                 <input type="text" id="form3Example2" class="form-control form-control-lg"
-                                    placeholder="Enter your surname" name="surname">
+                                    placeholder="Enter your surname" name="surname" required>
                             </div>
                         </div>
                         <!-- E-mail input -->
                         <div class="form-outline mb-3">
                             <label class="form-label" for="form3Example4">Email</label>
                             <input type="email" id="form3Example4" class="form-control form-control-lg"
-                                placeholder="Voer je E-mail in" name="email" />
+                                placeholder="Voer je E-mail in" name="email" required>
                         </div>
                         <!-- Password input -->
                         <div class="form-outline mb-3">
                             <label class="form-label" for="form3Example4">Wachtwoord</label>
                             <input type="password" id="form3Example4" class="form-control form-control-lg"
-                                placeholder="Voer je wachtwoord in" name="password" />
+                                placeholder="Voer je wachtwoord in" name="password" required>
 
                         </div>
                         <div class="text-center text-lg-start mt-4 pt-2">

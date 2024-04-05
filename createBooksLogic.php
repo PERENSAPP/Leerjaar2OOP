@@ -1,37 +1,47 @@
 <?php
 session_start();
 require_once "conn.php";
-
 class CreateBooksLogic
 {
     private $conn;
-
-    public function __construct($conn)
+    private $bookName;
+    private $ISBN;
+    private $nameAuthor;
+    private $stock; 
+    public function __construct($conn, $bookName, $ISBN, $nameAuthor, $stock)
     {
         $this->conn = $conn;
+        $this->bookName = $bookName;
+        $this->ISBN = $ISBN;
+        $this->nameAuthor = $nameAuthor;
+        $this->stock = $stock;
     }
-    public function createBook($bookName, $ISBN, $nameAuthor, $stock, $img)
+ 
+    public function createBook()
     {
-        $insert_books = $this->conn->prepare("INSERT INTO books(bookName, ISBN, nameAuthor, stock, img) VALUES(:bookName, :ISBN, :nameAuthor, :stock, :img)");
-        $insert_books->bindParam(":bookName", $bookName);
-        $insert_books->bindParam(":ISBN", $ISBN);
-        $insert_books->bindParam(":nameAuthor", $nameAuthor);
-        $insert_books->bindParam(":stock", $stock);
-        $insert_books->bindParam(":img", $img); ///// Error: kan een colom niet vinden wat ook zo is. 
+        $query = "INSERT INTO books(bookName, ISBN, nameAuthor, stock) VALUES(:bookName, :ISBN, :nameAuthor, :stock)";
+ 
+        $insert_books = $this->conn->prepare($query);
+        $insert_books->bindParam(":bookName", $this->bookName);
+        $insert_books->bindParam(":ISBN", $this->ISBN);
+        $insert_books->bindParam(":nameAuthor", $this->nameAuthor);
+        $insert_books->bindParam(":stock", $this->stock);
+ 
         $insert_books->execute();
     }
 }
-
-if (isset ($_POST['submited'])) {
+ 
+if (isset($_POST['submited'])) {
     $bookName = strip_tags($_POST["bookName"]);
     $ISBN = strip_tags($_POST["ISBN"]);
     $nameAuthor = strip_tags($_POST["nameAuthor"]);
     $stock = strip_tags($_POST["stock"]);
-    $img = strip_tags($_POST["img"]);
 
-    $createBooksLogic = new CreateBooksLogic($conn);
-    $createBooksLogic->createBook($bookName, $ISBN, $nameAuthor, $stock, $img);
-
+ 
+    // Create instance of CreateBooksLogic and insert data into the database
+    $createBooksLogic = new CreateBooksLogic($conn, $bookName, $ISBN, $nameAuthor, $stock);
+    $createBooksLogic->createBook();
+ 
     header("location: bookArchive.php");
     exit();
 }

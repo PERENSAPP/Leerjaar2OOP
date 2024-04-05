@@ -43,6 +43,8 @@
     </nav>
     <div class="row spacer text-light">
         <div class="span4">...</div>
+        <div class="span4">...</div>
+        <div class="span4">...</div>
 
 
     </div>
@@ -50,7 +52,7 @@
         <div class="row d-flex justify-content-center align-items-center h-100">
 
             <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
-                <form action="createBooksLogic.php" method="post">
+                <form action="createBooksLogic.php" method="post" >
                     <!-- titel input -->
                     <div class="form-outline mb-4">
                         <label class="form-label" for="form3Example3">Titel</label>
@@ -80,12 +82,6 @@
                             placeholder="Voer het aantal boeken in" />
 
                     </div>
-                    <!-- img input -->
-                    <div class="mb-3">
-                        <label for="formFile" class="form-label"></label>
-                        <input class="form-control" type="file" id="formFile" name="img">
-                    </div>
-
 
 
                     <div class="text-center text-lg-start mt-4 pt-2">
@@ -100,6 +96,9 @@
     </div>
     <div class="row spacer text-light">
         <div class="span4">...</div>
+        <div class="span4">...</div>
+        <div class="span4">...</div>
+
 
 
     </div>
