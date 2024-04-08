@@ -8,7 +8,7 @@
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
-    </script>
+        </script>
 </head>
 
 <body>
@@ -35,11 +35,9 @@
                 </ul>
             </div>
         </div>
-        <form class="d-flex" role="search">
-
-            <input class="form-control me-2" type="search" placeholder="Zoeken" aria-label="Search">
-            <button class="btn btn-outline-light" type="submit">Zoek</button>
-
+        <form class="d-flex" role="search" action="searchBar.php" method="POST">
+            <input class="form-control me-2" type="search" name="keyword" placeholder="Zoeken" aria-label="Search">
+            <button class="btn btn-outline-light" type="submit" name="search">Zoek</button>
         </form>
     </nav>
     <div class="row spacer text-light">
@@ -57,9 +55,9 @@
     <div class="container text-center">
         <div class="row justify-content-start g-2 gap-3">
 
-            <?php 
-   include 'bookArchiveLogic.php';
-   ?>
+            <?php
+            include 'bookArchiveLogic.php';
+            ?>
         </div>
     </div>
 

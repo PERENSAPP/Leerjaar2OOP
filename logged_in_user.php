@@ -1,8 +1,8 @@
 <?php
 session_start();
 require_once "conn.php";
-
 ?>
+
 <!DOCTYPE html>
 <html>
 
@@ -21,8 +21,7 @@ require_once "conn.php";
     <nav class="navbar navbar-expand-lg bg-dark ">
         <div class="container-fluid">
             <a class="navbar-brand" href="logged_in_user.php">
-                <img src="Pictures/logo2.png" alt="" width="70" height="50" class="d-inline-block align-text-top"
-                >
+                <img src="Pictures/logo2.png" alt="" width="70" height="50" class="d-inline-block align-text-top">
             </a>
             <div class="collapse navbar-collapse " id="navbarNavDropdown">
                 <ul class="navbar-nav text-light">
@@ -38,15 +37,12 @@ require_once "conn.php";
                     <li class="nav-item">
                         <a class="nav-link text-light" href="logOut.php">log uit</a>
                     </li>
-
                 </ul>
             </div>
         </div>
-        <form class="d-flex" role="search">
-
-            <input class="form-control me-2" type="search" placeholder="Zoeken" aria-label="Search">
-            <button class="btn btn-outline-light" type="submit">Zoek</button>
-
+        <form class="d-flex" role="search" action="searchBar.php" method="POST">
+            <input class="form-control me-2" type="search" name="keyword" placeholder="Zoeken" aria-label="Search">
+            <button class="btn btn-outline-light" type="submit" name="search">Zoek</button>
         </form>
     </nav>
 
@@ -55,8 +51,6 @@ require_once "conn.php";
         <div class="span4">...</div>
         <div class="span4">...</div>
     </div>
-
-
 
     <div class="row justify-content-around">
         <div class="card mb-3 text-bg-primary" style="max-width: 50rem;">
@@ -144,15 +138,12 @@ require_once "conn.php";
 
     </div>
 
-
     <footer class="bg-dark text-center text-light">
         <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.05);">
             © 2024 Copyright:
             <a class="text-light" href="https://github.com/PERENSAPP/Leerjaar2OOP">Evan&KevinInc.</a>
         </div>
     </footer>
-
-
 
 </body>
 
