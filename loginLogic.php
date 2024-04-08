@@ -30,6 +30,7 @@ class LoginLogic{
             // If the password is correct 
             $_SESSION["name"] = $name;
             $_SESSION["surname"] = $surname;
+            $_SESSION["email"] = $email;
             header("location: logged_in_user.php"); 
             exit;   
         } else {

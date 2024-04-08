@@ -100,6 +100,7 @@ if ($aantal == 1) {
     $signup->registerUser($name, $surname, $email, $password);
     $_SESSION["name"] = $name;
     $_SESSION["surname"] = $surname;
+    $_SESSION["email"] = $email;
     header("Location: logged_in_user.php");
     exit();
 }
