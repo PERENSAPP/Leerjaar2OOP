@@ -52,7 +52,7 @@ if (isset($searchResults) && !empty($searchResults)) {
                 <li class='list-group-item text-bg-dark'> Voorraad: " . $book['stock'] . "</li>
             </ul>
             <form action='bookLoopLogic.php'>
-            <button value=".$book['idbooks'] ." class='btn btn-primary'>Reserveer nu</button>
+            <button name='submit' value=".$book['idbooks'] ." class='btn btn-primary'>Reserveer nu</button>
             </form>
             <div class='span4 text-dark'>...</div>
         </div>";
@@ -69,7 +69,7 @@ if (isset($searchResults) && !empty($searchResults)) {
                 <li class='list-group-item text-bg-dark'> Voorraad: " . $book['stock'] . "</li>
             </ul>
             <form action='bookLoopLogic.php'>
-            <button value=".$book['idbooks'] ." class='btn btn-primary'>Reserveer nu</button>
+            <button name='submit' value=".$book['idbooks'] ." class='btn btn-primary'>Reserveer nu</button>
             </form>
             <div class='span4 text-dark'>...</div>
         </div>";
