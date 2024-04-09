@@ -1,3 +1,8 @@
+<?php
+session_start();
+// require_once "conn.php";
+// $_SESSION["roleId"];
+?>
 <!DOCTYPE html>
 <html>
 
@@ -22,16 +27,27 @@
                     <li class="nav-item">
                         <a class="nav-link text-light" href="bookArchive.php">Bibliotheek</a>
                     </li>
-                    <li class="nav-item">
+                    <?php
+                    if ($_SESSION["roleId"] == 1 || $_SESSION["roleId"] == 3) {
+                        echo '<li class="nav-item">
                         <a class="nav-link text-light" href="createBooks.php">Boeken toevoegen</a>
-                    </li>
+                    </li> ';
+                    }
+                    ?>
                     <li class="nav-item">
                         <a class="nav-link text-light" href="bookReservation.php"></a>
                     </li>
+                    <?php
+                    // Check if the user is an admin
+                    if ($_SESSION["roleId"] === 3) {
+                        echo '<li class="nav-item">
+                                <a class="nav-link text-light" href="adminOverview.php">Admin Pagina</a>
+                            </li>';
+                    }
+                    ?>
                     <li class="nav-item">
                         <a class="nav-link text-light" href="logOut.php">log uit</a>
                     </li>
-
                 </ul>
             </div>
         </div>
@@ -40,6 +56,7 @@
             <button class="btn btn-outline-light" type="submit" name="search">Zoek</button>
         </form>
     </nav>
+
     <div class="row spacer text-light">
         <div class="span4">...</div>
 

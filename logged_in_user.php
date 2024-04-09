@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once "conn.php";
+$_SESSION["roleId"];
 ?>
 
 <!DOCTYPE html>
@@ -14,7 +15,7 @@ require_once "conn.php";
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
-    </script>
+        </script>
 </head>
 
 <body>
@@ -28,12 +29,24 @@ require_once "conn.php";
                     <li class="nav-item">
                         <a class="nav-link text-light" href="bookArchive.php">Bibliotheek</a>
                     </li>
-                    <li class="nav-item">
+                    <?php
+                    if ($_SESSION["roleId"] == 1 or $_SESSION["roleId"] == 3) {
+                        echo '<li class="nav-item">
                         <a class="nav-link text-light" href="createBooks.php">Boeken toevoegen</a>
-                    </li>
+                    </li> ';
+                    }
+                    ?>
                     <li class="nav-item">
                         <a class="nav-link text-light" href="bookReservation.php"></a>
                     </li>
+                    <?php
+                    // Check if the user is an admin
+                    if ($_SESSION["roleId"] === 3) {
+                        echo '<li class="nav-item">
+                                <a class="nav-link text-light" href="adminOverview.php">Admin Pagina</a>
+                            </li>';
+                    }
+                    ?>
                     <li class="nav-item">
                         <a class="nav-link text-light" href="logOut.php">log uit</a>
                     </li>
@@ -57,7 +70,8 @@ require_once "conn.php";
             <div class="row g-0">
                 <div class="col-md-8">
                     <div class="card-body">
-                        <h5 class="card-title">Welkom: <?php echo $_SESSION["name"] . " " . $_SESSION["surname"];?>
+                        <h5 class="card-title">Welkom:
+                            <?php echo $_SESSION["name"] . " " . $_SESSION["surname"]; ?>
                         </h5>
                         <p class="card-text">Op school zijn er soms studenten die vanwege financiële redenen geen
                             schoolboeken kunnen aanschaffen, op deze website kunt u boeken gratis reserveren op kosten

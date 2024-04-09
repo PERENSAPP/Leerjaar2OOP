@@ -24,6 +24,7 @@ class LoginLogic{
         $email = $data->email;
         $name = $data->name;
         $surname = $data->surname; 
+        $roleId = $data->role_idrole;
     
 
         if (password_verify($password, $hashed_password)) {
@@ -31,6 +32,7 @@ class LoginLogic{
             $_SESSION["name"] = $name;
             $_SESSION["surname"] = $surname;
             $_SESSION["email"] = $email;
+            $_SESSION["roleId"] = $roleId;
             header("location: logged_in_user.php"); 
             exit;   
         } else {

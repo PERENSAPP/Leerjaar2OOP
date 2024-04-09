@@ -1,3 +1,8 @@
+<?php
+session_start();
+require_once "conn.php";
+$_SESSION["roleId"];
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,7 +14,7 @@
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
-    </script>
+        </script>
     <title>Boeken toevoegen</title>
 </head>
 
@@ -24,37 +29,47 @@
                     <li class="nav-item">
                         <a class="nav-link text-light" href="bookArchive.php">Bibliotheek</a>
                     </li>
-                    <li class="nav-item">
+                    <?php
+                    if ($_SESSION["roleId"] == 1 || $_SESSION["roleId"] == 3) {
+                        echo '<li class="nav-item">
                         <a class="nav-link text-light" href="createBooks.php">Boeken toevoegen</a>
-                    </li>
+                    </li> ';
+                    }
+                    ?>
                     <li class="nav-item">
                         <a class="nav-link text-light" href="bookReservation.php"></a>
                     </li>
+                    <?php
+                    // Check if the user is an admin
+                    if ($_SESSION["roleId"] === 3) {
+                        echo '<li class="nav-item">
+                                <a class="nav-link text-light" href="adminOverview.php">Admin Pagina</a>
+                            </li>';
+                    }
+                    ?>
                     <li class="nav-item">
                         <a class="nav-link text-light" href="logOut.php">log uit</a>
                     </li>
-
                 </ul>
             </div>
         </div>
-        <form class="d-flex" role="search">
-
-            <input class="form-control me-2" type="search" placeholder="Zoeken" aria-label="Search">
-            <button class="btn btn-outline-light" type="submit">Zoek</button>
-
+        <form class="d-flex" role="search" action="searchBar.php" method="POST">
+            <input class="form-control me-2" type="search" name="keyword" placeholder="Zoeken" aria-label="Search">
+            <button class="btn btn-outline-light" type="submit" name="search">Zoek</button>
         </form>
     </nav>
+
     <div class="row spacer text-light">
         <div class="span4">...</div>
 
     </div>
 
-    
+
     <div class="container-fluid h-custom">
         <div class="row d-flex justify-content-between align-items-center h-100">
 
             <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
-            
+
                 <form action="createBooksLogic.php" method="post">
                     <!-- titel input -->
                     <div class="form-outline mb-4">
