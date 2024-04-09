@@ -40,6 +40,14 @@ require_once "conn.php";
                             </li>';
                     }
                     ?>
+                    <?php
+                    // Check if the user is an admin
+                    if ($_SESSION["roleId"] === 3) {
+                        echo '<li class="nav-item">
+                                <a class="nav-link text-light" href="adminOverview.php">Admin Pagina</a>
+                            </li>';
+                    }
+                    ?>
                     <li class="nav-item">
                         <a class="nav-link text-light" href="logOut.php">log uit</a>
                     </li>
