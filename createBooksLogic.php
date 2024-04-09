@@ -28,9 +28,10 @@ class CreateBooksLogic
         $data = $stmt->fetch(PDO::FETCH_OBJ);
         $roleId = $data ? $data->role_idrole : null;
 
-        if (!$roleId || $roleId != 1) {
-            // User is not found or role ID is not 1
-            header("location: retry_login.php"); ///////////////////////////// headerlocation fixen///             
+        // Check if the user role ID is either 1 (admin) or 3
+        if (!$roleId || ($roleId != 1 && $roleId != 3)) {
+            // User is not found or role ID is not 1 or 3 
+            header("location: retry_login.php"); //TODO: headerlocation fixen //          
             exit;
         }
     }
