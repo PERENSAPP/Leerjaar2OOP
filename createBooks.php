@@ -30,10 +30,10 @@ $_SESSION["roleId"];
                         <a class="nav-link text-light" href="bookArchive.php">Bibliotheek</a>
                     </li>
                     <?php
-                    if ($_SESSION["roleId"] == 1 || $_SESSION["roleId"] == 3) {
+                    if (isset($_SESSION["roleId"]) && ($_SESSION["roleId"] == 1 || $_SESSION["roleId"] == 3)) {
                         echo '<li class="nav-item">
-                        <a class="nav-link text-light" href="createBooks.php">Boeken toevoegen</a>
-                    </li> ';
+                            <a class="nav-link text-light" href="createBooks.php">Boeken toevoegen</a>
+                          </li>';
                     }
                     ?>
                     <?php
@@ -71,23 +71,24 @@ $_SESSION["roleId"];
                     <!-- titel input -->
                     <div class="form-outline mb-4">
                         <label class="form-label" for="form3Example3">Titel</label>
-                        <input type="text" id="title" id="form3Example3" name="bookName" class="form-control form-control-lg"
-                            placeholder="Voer de naam van het boek in" required />
+                        <input type="text" id="title" id="form3Example3" name="bookName"
+                            class="form-control form-control-lg" placeholder="Voer de naam van het boek in" required />
 
                     </div>
 
                     <!-- isbn input -->
                     <div class="form-outline mb-3">
                         <label class="form-label" for="form3Example4">ISBN (13 Cijfers)</label>
-                        <input type="text" id="apiKey" id="form3Example4" name="ISBN" class="form-control form-control-lg"
-                            placeholder="Voer het ISBN nummer in" maxlength="13" required />
+                        <input type="text" id="apiKey" id="form3Example4" name="ISBN"
+                            class="form-control form-control-lg" placeholder="Voer het ISBN nummer in" maxlength="13"
+                            required />
 
                     </div>
                     <!-- auteur input -->
                     <div class="form-outline mb-3">
                         <label class="form-label" for="form3Example4">Auteur</label>
-                        <input type="text" id="writer" id="form3Example4" name="nameAuthor" class="form-control form-control-lg"
-                            placeholder="Voer de auteur in" required />
+                        <input type="text" id="writer" id="form3Example4" name="nameAuthor"
+                            class="form-control form-control-lg" placeholder="Voer de auteur in" required />
 
                     </div>
                     <!-- voorraad input -->
@@ -128,54 +129,54 @@ $_SESSION["roleId"];
         </div>
     </footer>
     <script>
-// laat de javascript pas uitvoeren als de pagina volledig geladen is
-document.addEventListener("DOMContentLoaded", function () {
+        // laat de javascript pas uitvoeren als de pagina volledig geladen is
+        document.addEventListener("DOMContentLoaded", function () {
 
-// Voeg een eventlistener toe aan het ISBN-veld en kijk of het ISBN is gewijzigd
-document.getElementById("apiKey").addEventListener("change", function () {
-    var isbn = this.value; // haal de waarde van het ISBN-veld op
-    fetchBook(isbn); // haal de boekgegevens op
-});
-});
+            // Voeg een eventlistener toe aan het ISBN-veld en kijk of het ISBN is gewijzigd
+            document.getElementById("apiKey").addEventListener("change", function () {
+                var isbn = this.value; // haal de waarde van het ISBN-veld op
+                fetchBook(isbn); // haal de boekgegevens op
+            });
+        });
 
-function fetchBook(isbn) {
+        function fetchBook(isbn) {
 
-// Definieer de Google Books API-sleutel en de URL
-var apiKey = "AIzaSyAa1Nsuf-ELLSSZC1GHUVAw5nghtflws8k";
-var url = "https://www.googleapis.com/books/v1/volumes?q=isbn:" + isbn + "&key=" + apiKey;
+            // Definieer de Google Books API-sleutel en de URL
+            var apiKey = "AIzaSyAa1Nsuf-ELLSSZC1GHUVAw5nghtflws8k";
+            var url = "https://www.googleapis.com/books/v1/volumes?q=isbn:" + isbn + "&key=" + apiKey;
 
-// haalt de boekgegevens op van de Google Books API
-fetch(url)
+            // haalt de boekgegevens op van de Google Books API
+            fetch(url)
 
-    // verwerkt de JSON-reactie
-    .then(response => response.json())
+                // verwerkt de JSON-reactie
+                .then(response => response.json())
 
-    // Roep de functie aan met de krijgen data
-    .then(data => {
-        displayBook(data);
-    })
-    // Vang fouten op
-    .catch(error => console.error(error));
-}
+                // Roep de functie aan met de krijgen data
+                .then(data => {
+                    displayBook(data);
+                })
+                // Vang fouten op
+                .catch(error => console.error(error));
+        }
 
-// Toon de boekgegevens in een formulier
-function displayBook(data) {
+        // Toon de boekgegevens in een formulier
+        function displayBook(data) {
 
-// Controleer of er boeken zijn gevonden uit het ISBN
-if (data.totalItems > 0) {
-    // Haal de boekgegevens op uit de JSON-reactie
-    var book = data.items[0].volumeInfo;
-    // update html met boekgegevens
-    document.getElementById("title").value = book.title || '';
-    document.getElementById("writer").value = (book.authors && book.authors.length > 0) ? book.authors.join(', ') : '';
+            // Controleer of er boeken zijn gevonden uit het ISBN
+            if (data.totalItems > 0) {
+                // Haal de boekgegevens op uit de JSON-reactie
+                var book = data.items[0].volumeInfo;
+                // update html met boekgegevens
+                document.getElementById("title").value = book.title || '';
+                document.getElementById("writer").value = (book.authors && book.authors.length > 0) ? book.authors.join(', ') : '';
 
 
-} else {
-    // Geef een foutmelding weer als er geen boek is gevonden
-    console.log("No book found for the provided ISBN.");
-}
-}
-</script>
+            } else {
+                // Geef een foutmelding weer als er geen boek is gevonden
+                console.log("No book found for the provided ISBN.");
+            }
+        }
+    </script>
 </body>
 
 </html>
