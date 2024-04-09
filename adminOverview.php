@@ -76,18 +76,7 @@ require_once "conn.php";
             <tbody>
                 <?php
                 // Query om uitgeleende boeken op te halen
-                $sql = "SELECT
-                            boek.boek_id,
-                            boek.titel,
-                            boek.auteur,
-                            gebruiker.naam AS lener_naam,
-                            uitlening.uitgeleend_sinds
-                        FROM
-                            uitlening
-                        INNER JOIN
-                            boek ON uitlening.boek_id = boek.boek_id
-                        INNER JOIN
-                            gebruiker ON uitlening.lener_id = gebruiker.gebruiker_id";
+                $sql = "";
                 $result = $conn->query($sql);
                 if ($result->rowCount() > 0) {
                     // Output data van elke rij
