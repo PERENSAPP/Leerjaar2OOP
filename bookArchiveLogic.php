@@ -26,7 +26,8 @@ class BookArchiveLogic
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 }
-+
+
+$bookArchiveLogic = new BookArchiveLogic($conn);
 $books = [];
 
 if (isset($_POST['search']) && isset($_POST['keyword'])) {
