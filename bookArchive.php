@@ -34,9 +34,6 @@ session_start();
                     </li> ';
                     }
                     ?>
-                    <li class="nav-item">
-                        <a class="nav-link text-light" href="bookReservation.php"></a>
-                    </li>
                     <?php
                     // Check if the user is an admin
                     if ($_SESSION["roleId"] === 3) {
