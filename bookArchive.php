@@ -28,10 +28,12 @@ session_start();
                         <a class="nav-link text-light" href="bookArchive.php">Bibliotheek</a>
                     </li>
                     <?php
-                    if ($_SESSION["roleId"] == 1 || $_SESSION["roleId"] == 3) {
-                        echo '<li class="nav-item">
-                        <a class="nav-link text-light" href="createBooks.php">Boeken toevoegen</a>
-                    </li> ';
+                    if (isset($_SESSION["roleId"])) {
+                        if ($_SESSION["roleId"] == 1 || $_SESSION["roleId"] == 3) {
+                            echo '<li class="nav-item">
+                                    <a class="nav-link text-light" href="createBooks.php">Boeken toevoegen</a>
+                                </li>';
+                        }
                     }
                     ?>
                     <?php
