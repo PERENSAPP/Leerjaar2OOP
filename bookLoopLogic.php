@@ -54,7 +54,7 @@ class updateStock
     public function update()
     {
         if ($this->stock == 0) {
-            echo "Dit boek is niet op voorraad";
+            header("Location: bookReservedError.php");
             return;
         }
         $updateStock = $this->stock - 1;
@@ -63,20 +63,17 @@ class updateStock
 
         $query = "UPDATE books SET stock = :stock WHERE idbooks = :id";
         $stmt = $this->conn->prepare($query);
-        $stmt->bindParam(":stock", $this->stock);
+        $stmt->bindParam(":stock", $updateStock);
         $stmt->bindParam(":id", $this->id);
         $stmt->execute();
     }
 }
 
 
-if (isset($_POST['reserve'])) {
+if (isset($_POST['submit'])) {
     $name = $_SESSION['name'];
     $surname = $_SESSION['surname'];
-    $title = strip_tags($_POST['title']);
-    $isbn = strip_tags($_POST['isbn']);
     $id = strip_tags($_POST['submit']);
-    $stock = strip_tags($_POST['stock']);
     $time = date("Y-m-d H:i:s");
 
     echo $id;
@@ -91,12 +88,20 @@ if (isset($_POST['reserve'])) {
         $title = $book['bookName'];
         $isbn = $book['ISBN'];
         $stock = $book['stock'];
+
+        if ($stock <= 0) {
+            header("Location: bookReservedError.php");
+            return;
+        }
+
+        $bookLoopLogic = new BookLoopLogic($conn, $name, $surname, $title, $isbn, $time);
+        $bookLoopLogic->reserve();
+
+        $updateStock = new updateStock($conn, $id, $stock);
+        $updateStock->update();
+        header("Location: bookReservedSucces.php");
+    } else {
+        header("Location: bookReservedError.php");
     }
 
-    $bookLoopLogic = new BookLoopLogic($conn, $name, $surname, $title, $isbn, $time);
-    $bookLoopLogic->reserve();
-
-    $updateStock = new updateStock($conn, $id, $stock);
-    $updateStock->update();
-    // header("Location: bookArchive.php");
 }
