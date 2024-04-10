@@ -68,7 +68,7 @@ $_SESSION["roleId"];
     </div>
     <div class="container text-center">
         <div class="alert alert-danger" role="alert">
-            boek is al gereserveerd
+            Boek is niet beschikbaar of u heeft al 1 exemplaar gereserveerd!
         </div>
         <div class="row spacer text-light">
             <div class="span4">...</div>
