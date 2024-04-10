@@ -1,12 +1,15 @@
 <?php
 require_once "conn.php";
+
 class BookArchiveLogic
 {
     private $conn;
+
     public function __construct($conn)
     {
         $this->conn = $conn;
     }
+
     public function getBooks()
     {
         //Get all books from table books
@@ -15,20 +18,42 @@ class BookArchiveLogic
         $get_books->execute();
         return $get_books->fetchAll();
     }
+
     public function searchBooks($keyword)
     {
         // Prepare the query to search for books by name or bookName
         $query = "SELECT * FROM books WHERE nameAuthor LIKE :keyword OR bookName LIKE :keyword";
         $stmt = $this->conn->prepare($query);
-        $keyword = "%$keyword%"; 
+        $keyword = "%$keyword%";
         $stmt->bindParam(":keyword", $keyword);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function deleteBook($bookID)
+    {
+        // Prepare the query to delete the book
+        $query = "DELETE FROM books WHERE idbooks = :bookID";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(":bookID", $bookID);
+        return $stmt->execute(); // Returns true if deletion is successful, false otherwise
     }
 }
 
 $bookArchiveLogic = new BookArchiveLogic($conn);
 $books = [];
+
+// Check if the form is submitted
+if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
+    $bookID = $_POST['submit'];
+    // Call the deleteBook method to delete the book
+    $deleteResult = $bookArchiveLogic->deleteBook($bookID);
+    if ($deleteResult) {
+        $message = "Book successfully deleted.";
+    } else {
+        $error = "Error deleting book.";
+    }
+}
 
 if (isset($_POST['search']) && isset($_POST['keyword'])) {
     $keyword = strip_tags($_POST["keyword"]);
@@ -51,8 +76,8 @@ if (isset($searchResults) && !empty($searchResults)) {
                 <li class='list-group-item text-bg-dark'> Auteur: " . $book['nameAuthor'] . "</li>
                 <li class='list-group-item text-bg-dark'> Voorraad: " . $book['stock'] . "</li>
             </ul>
-            <form action='#' method='post'>
-            <button name='submit' value=".$book['idbooks'] ." class='btn btn-danger'>Verwijder boek</button>
+            <form action='#' method='post'> 
+            <button name='submit' value=" . $book['idbooks'] . " class='btn btn-danger'>Verwijder boek</button>
             </form>
             <div class='span4 text-dark'>...</div>
         </div>";
@@ -69,11 +94,19 @@ if (isset($searchResults) && !empty($searchResults)) {
                 <li class='list-group-item text-bg-dark'> Voorraad: " . $book['stock'] . "</li>
             </ul>
             <form action='#' method='post'>
-            <button name='submit' value=".$book['idbooks'] ." class='btn btn-danger'>Verwijder boek</button>
+            <button name='submit' value=" . $book['idbooks'] . " class='btn btn-danger'>Verwijder boek</button>
             </form>
             <div class='span4 text-dark'>...</div>
         </div>";
     }
 }
+?>
 
+<?php
+if (isset($message)) {
+    echo "<p>$message</p>";
+}
+if (isset($error)) {
+    echo "<p>$error</p>";
+}
 ?>
