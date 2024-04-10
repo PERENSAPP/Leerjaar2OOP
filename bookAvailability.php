@@ -23,13 +23,24 @@
                 <ul class="navbar-nav text-light">
                     <li class="nav-item">
                         <a class="nav-link text-light" href="bookArchive.php">Bibliotheek</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-light" href="createBooks.php">Boeken toevoegen</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-light" href="bookReservation.php"></a>
-                    </li>
+                        <?php
+                    if (isset($_SESSION["roleId"]) && ($_SESSION["roleId"] == 1 || $_SESSION["roleId"] == 3)) {
+                        echo '<li class="nav-item">
+                            <a class="nav-link text-light" href="createBooks.php">Boeken toevoegen</a>
+                          </li>';
+                    }
+                    ?>
+
+                    <?php
+                    // Check if the user is an admin
+                    if (isset($_SESSION["roleId"])) {
+                        if ($_SESSION["roleId"] === 3) {
+                            echo '<li class="nav-item">
+                                <a class="nav-link text-light" href="adminOverview.php">Admin Pagina</a>
+                            </li>';
+                        }
+                    }
+                    ?>
                     <li class="nav-item">
                         <a class="nav-link text-light" href="logOut.php">log uit</a>
                     </li>
