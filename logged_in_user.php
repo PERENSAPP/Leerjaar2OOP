@@ -112,7 +112,6 @@ require_once "conn.php";
                             <li>Werkboeken en oefenmateriaal</li>
                             <li>Naslagwerken en encyclopedieën</li>
                             <li>Examenbundels en samenvattingen</li>
-                            <li>Schrijfwaren en kantoorbenodigdheden</li>
                         </ul>
                         </p>
 
