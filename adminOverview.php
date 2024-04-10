@@ -107,13 +107,13 @@ $result = $conn->query($sql);
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th scope="col">Order Id</th>
+                    <th scope="col">Bestelling Id</th>
                     <th scope="col">Titel Book</th>
                     <th scope="col">ISBN</th>
                     <th scope="col">Lener</th>
                     <th scope="col">Uitgeleend Sinds</th>
                     <?php if ($is_admin): ?>
-                        <th scope="col">Delete Order</th>
+                        <th scope="col">Verwijder bestelling</th>
                     <?php endif; ?>
                 </tr>
             </thead>
