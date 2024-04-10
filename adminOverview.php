@@ -1,6 +1,58 @@
 <?php
 session_start();
 require_once "conn.php";
+
+// Check if the user is logged in and has the appropriate role ID
+if (!isset($_SESSION["roleId"]) || ($_SESSION["roleId"] !== 1 && $_SESSION["roleId"] !== 3)) {
+    header("Location: unauthorized.php");
+    exit();
+}
+
+// Define the $is_admin variable
+$is_admin = ($_SESSION["roleId"] === 1 || $_SESSION["roleId"] === 3);
+
+function deleteOrder($conn, $orderID)
+{
+    // First, retrieve the book's information
+    $sqlGetOrder = "SELECT * FROM reserveer WHERE id = :orderID";
+    $stmtGetOrder = $conn->prepare($sqlGetOrder);
+    $stmtGetOrder->bindParam(":orderID", $orderID, PDO::PARAM_INT);
+    $stmtGetOrder->execute();
+    $order = $stmtGetOrder->fetch(PDO::FETCH_ASSOC);
+
+    // If the order is found, proceed with deleting and returning stock
+    if ($order) {
+        // Delete the order
+        $sqlDeleteOrder = "DELETE FROM reserveer WHERE id = :orderID";
+        $stmtDeleteOrder = $conn->prepare($sqlDeleteOrder);
+        $stmtDeleteOrder->bindParam(":orderID", $orderID, PDO::PARAM_INT);
+        $stmtDeleteOrder->execute();
+
+        // Update the stock
+        $sqlUpdateStock = "UPDATE books SET stock = stock + 1 WHERE id = :bookID";
+        $stmtUpdateStock = $conn->prepare($sqlUpdateStock);
+        $stmtUpdateStock->bindParam(":bookID", $order['book_id'], PDO::PARAM_INT);
+        $stmtUpdateStock->execute();
+
+        return true; // Return true to indicate successful deletion
+    } else {
+        return false; // Return false if the order is not found
+    }
+}
+
+// Check if the form is submitted for deleting an order
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['delete_order'])) {
+    $orderID = $_POST["delete_order"];
+    if (deleteOrder($conn, $orderID)) {
+        $message = "Order successfully deleted and stock returned.";
+    } else {
+        $error = "Error deleting order.";
+    }
+}
+
+// Query to retrieve borrowed books
+$sql = "SELECT * FROM reserveer";
+$result = $conn->query($sql);
 ?>
 
 <!DOCTYPE html>
@@ -32,22 +84,11 @@ require_once "conn.php";
                     <li class="nav-item">
                         <a class="nav-link text-light" href="createBooks.php">Boeken toevoegen</a>
                     </li>
-                    <?php
-                    // Check if the user is an admin
-                    if ($_SESSION["roleId"] === 1) {
-                        echo '<li class="nav-item">
-                                <a class="nav-link text-light" href="adminOverview.php">Admin Pagina</a>
-                            </li>';
-                    }
-                    ?>
-                    <?php
-                    // Check if the user is an admin
-                    if ($_SESSION["roleId"] === 3) {
-                        echo '<li class="nav-item">
-                                <a class="nav-link text-light" href="adminOverview.php">Admin Pagina</a>
-                            </li>';
-                    }
-                    ?>
+                    <?php if ($is_admin): ?>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" href="adminOverview.php">Admin Pagina</a>
+                        </li>
+                    <?php endif; ?>
                     <li class="nav-item">
                         <a class="nav-link text-light" href="logOut.php">log uit</a>
                     </li>
@@ -66,33 +107,50 @@ require_once "conn.php";
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th scope="col">Boek ID</th>
-                    <th scope="col">Titel</th>
-                    <th scope="col">Auteur</th>
+                    <th scope="col">Order Id</th>
+                    <th scope="col">Titel Book</th>
+                    <th scope="col">ISBN</th>
                     <th scope="col">Lener</th>
                     <th scope="col">Uitgeleend Sinds</th>
+                    <?php if ($is_admin): ?>
+                        <th scope="col">Delete Order</th>
+                    <?php endif; ?>
                 </tr>
             </thead>
             <tbody>
-                <?php
-                // Query om uitgeleende boeken op te halen
-                $sql = "";
-                $result = $conn->query($sql);
-                if ($result->rowCount() > 0) {
-                    // Output data van elke rij
-                    while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-                        echo "<tr>
-                            <td>" . $row["boek_id"] . "</td>
-                            <td>" . $row["titel"] . "</td>
-                            <td>" . $row["auteur"] . "</td>
-                            <td>" . $row["lener_naam"] . "</td>
-                            <td>" . $row["uitgeleend_sinds"] . "</td>
-                        </tr>";
-                    }
-                } else {
-                    echo "<tr><td colspan='5'>Geen uitgeleende boeken gevonden</td></tr>";
-                }
-                ?>
+                <?php if ($result->rowCount() > 0): ?>
+                    <?php while ($row = $result->fetch(PDO::FETCH_ASSOC)): ?>
+                        <tr>
+                            <td>
+                                <?= $row["id"] ?>
+                            </td>
+                            <td>
+                                <?= $row["bookName"] ?>
+                            </td>
+                            <td>
+                                <?= $row["ISBN"] ?>
+                            </td>
+                            <td>
+                                <?= $row["name"] . " " . $row["surname"] ?>
+                            </td>
+                            <td>
+                                <?= $row["time"] ?>
+                            </td>
+                            <?php if ($is_admin): ?>
+                                <td>
+                                    <form method="post" action="<?= htmlspecialchars($_SERVER["PHP_SELF"]) ?>">
+                                        <input type="hidden" name="delete_order" value="<?= $row["id"] ?>">
+                                        <button type="submit" class="btn btn-danger">Verwijderen</button>
+                                    </form>
+                                </td>
+                            <?php endif; ?>
+                        </tr>
+                    <?php endwhile; ?>
+                <?php else: ?>
+                    <tr>
+                        <td colspan="6">Geen uitgeleende boeken gevonden</td>
+                    </tr>
+                <?php endif; ?>
             </tbody>
         </table>
     </div>
@@ -103,7 +161,6 @@ require_once "conn.php";
             <a class="text-light" href="https://github.com/PERENSAPP/Leerjaar2OOP">Evan&KevinInc.</a>
         </div>
     </footer>
-
 </body>
 
 </html>

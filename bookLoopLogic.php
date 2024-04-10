@@ -11,7 +11,6 @@ class BookLoopLogic
     private $isbn;
     private $time;
 
-
     public function __construct($conn, $name, $surname, $title, $isbn, $time)
     {
         $this->conn = $conn;
@@ -20,8 +19,8 @@ class BookLoopLogic
         $this->title = $title;
         $this->isbn = $isbn;
         $this->time = $time;
-
     }
+
     public function reserve()
     {
         $query = "INSERT INTO reserveer (bookName, ISBN, name, surname, time) VALUES (:bookName, :ISBN, :name, :surname, :time)";
@@ -32,18 +31,28 @@ class BookLoopLogic
         $stmt->bindParam(":surname", $this->surname);
         $stmt->bindParam(":time", $this->time);
         $stmt->execute();
-
-
     }
 
+    public function hasReservedBook()
+    {
+        $query = "SELECT COUNT(*) FROM reserveer WHERE name = :name AND surname = :surname AND ISBN = :isbn";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(":name", $this->name);
+        $stmt->bindParam(":surname", $this->surname);
+        $stmt->bindParam(":isbn", $this->isbn);
+        $stmt->execute();
+        $count = $stmt->fetchColumn();
+
+        return $count > 0;
+    }
 }
 
-
-class updateStock
+class UpdateStock
 {
     private $conn;
     private $id;
     private $stock;
+
     public function __construct($conn, $id, $stock)
     {
         $this->conn = $conn;
@@ -55,11 +64,9 @@ class updateStock
     {
         if ($this->stock == 0) {
             header("Location: bookReservedError.php");
-            return;
+            exit;
         }
         $updateStock = $this->stock - 1;
-
-
 
         $query = "UPDATE books SET stock = :stock WHERE idbooks = :id";
         $stmt = $this->conn->prepare($query);
@@ -69,14 +76,11 @@ class updateStock
     }
 }
 
-
 if (isset($_POST['submit'])) {
     $name = $_SESSION['name'];
     $surname = $_SESSION['surname'];
     $id = strip_tags($_POST['submit']);
     $time = date("Y-m-d H:i:s");
-
-    echo $id;
 
     $query = 'SELECT bookName, ISBN, stock FROM books WHERE idbooks = :id';
     $stmt = $conn->prepare($query);
@@ -91,17 +95,41 @@ if (isset($_POST['submit'])) {
 
         if ($stock <= 0) {
             header("Location: bookReservedError.php");
-            return;
+            exit;
         }
 
         $bookLoopLogic = new BookLoopLogic($conn, $name, $surname, $title, $isbn, $time);
-        $bookLoopLogic->reserve();
 
-        $updateStock = new updateStock($conn, $id, $stock);
+        if ($bookLoopLogic->hasReservedBook()) {
+            header("Location: bookReservedError.php");
+            exit;
+        }
+
+        $updateStock = new UpdateStock($conn, $id, $stock);
+
+        $bookLoopLogic->reserve();
         $updateStock->update();
+
         header("Location: bookReservedSucces.php");
+        exit;
     } else {
         header("Location: bookReservedError.php");
+        exit;
     }
-
 }
+?>
+<!DOCTYPE html>
+<html lang="nl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Reservation</title>
+    <!-- Add your stylesheets and scripts here -->
+</head>
+
+<body>
+    <!-- Your HTML content here -->
+</body>
+
+</html>
