@@ -29,10 +29,10 @@ function deleteOrder($conn, $orderID)
         $stmtDeleteOrder->execute();
 
         // Update the stock
-        $sqlUpdateStock = "UPDATE books SET stock = stock + 1 WHERE id = :bookID";
-        $stmtUpdateStock = $conn->prepare($sqlUpdateStock);
-        $stmtUpdateStock->bindParam(":bookID", $order['book_id'], PDO::PARAM_INT);
-        $stmtUpdateStock->execute();
+        // $sqlUpdateStock = "UPDATE books SET stock = stock + 1 WHERE id = :bookID";
+        // $stmtUpdateStock = $conn->prepare($sqlUpdateStock);
+        // $stmtUpdateStock->bindParam(":bookID", $order['book_id'], PDO::PARAM_INT);
+        // $stmtUpdateStock->execute();
 
         return true; // Return true to indicate successful deletion
     } else {
