@@ -46,14 +46,14 @@
                             <div class="col-md-6 mb-4">
                                 <label class="form-label" for="form3Example1">Name</label>
                                 <input type="text" id="form3Example1" class="form-control form-control-lg"
-                                    placeholder="Enter your name" name="name" required>
+                                    placeholder="Voer je naam in" name="name" required>
                             </div>
 
                             <!-- Surname -->
                             <div class="col-md-6 mb-4">
                                 <label class="form-label" for="form3Example2">Surname</label>
                                 <input type="text" id="form3Example2" class="form-control form-control-lg"
-                                    placeholder="Enter your surname" name="surname" required>
+                                    placeholder="Voer je achternaam in" name="surname" required>
                             </div>
                         </div>
                         <!-- E-mail input -->
