@@ -2,7 +2,7 @@
 session_start();
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 class Database
-{
+{   
     private $connection;
     public function __construct()
     {
@@ -29,7 +29,6 @@ class Database
         }
     }
 }
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////
 class Signup extends Database
 {
     // #1
@@ -49,7 +48,6 @@ class Signup extends Database
     {
         // Check if the email ends with "@tcrmbo.nl" or "@student.zadkine.nl"
         if (!preg_match('/(@tcrmbo\.nl$)|(@student\.zadkine\.nl$)/', $email)) {
-            // Redirect the user or display an error message ________ ADD retry page or another way to redirect people
             header("location: retry_register.php");
             exit();
         } else {
@@ -60,7 +58,8 @@ class Signup extends Database
         
             // Check if the email is from tcrmbo.nl domain and set role ID accordingly
             if (preg_match('/@tcrmbo\.nl$/', $email)) {
-                $role_idrole = 1; // Set ID for tcrmbo.nl users
+                // Set ID for tcrmbo.nl users
+                $role_idrole = 1; 
             }
         
             $sql = "INSERT INTO account(name, surname, email, password, role_idrole) VALUES(:name, :surname, :email, :password, :role_idrole)";
@@ -69,27 +68,26 @@ class Signup extends Database
                 ':surname' => $surname,
                 ':email' => $email,
                 ':password' => $hashed_password,
-                ':role_idrole' => $role_idrole // Assign the appropriate role ID
+                ':role_idrole' => $role_idrole // $_SESSION RoleId start
             ];
             $this->query($sql, $params);
         }
     }
-    // #4 
     private function validateEmail($email)
     {
         return filter_var($email, FILTER_VALIDATE_EMAIL) && preg_match('/@tcrmbo\.nl$/', $email);
     }
 }
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 // Retrieve data from POST request
 $name = strip_tags($_POST["name"]);
 $surname = strip_tags($_POST["surname"]);
 $email = strip_tags($_POST["email"]);
 $password = strip_tags($_POST["password"]);
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 // Create instance of Signup class
 $signup = new Signup();
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 // Check if email already exists
 $aantal = $signup->checkEmailExists($email);
 if ($aantal == 1) {

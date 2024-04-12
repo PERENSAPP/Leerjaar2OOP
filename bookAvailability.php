@@ -1,7 +1,5 @@
 <?php
 session_start();
-// require_once "conn.php";
-// $_SESSION["roleId"];
 ?>
 <!DOCTYPE html>
 <html>

@@ -12,7 +12,6 @@ class BookArchiveLogic
 
     public function getBooks()
     {
-        //Get all books from table books
         $query = "SELECT * FROM books";
         $get_books = $this->conn->prepare($query);
         $get_books->execute();
@@ -21,7 +20,6 @@ class BookArchiveLogic
 
     public function searchBooks($keyword)
     {
-        // Prepare the query to search for books by name or bookName
         $query = "SELECT * FROM books WHERE nameAuthor LIKE :keyword OR bookName LIKE :keyword";
         $stmt = $this->conn->prepare($query);
         $keyword = "%$keyword%";
@@ -32,7 +30,6 @@ class BookArchiveLogic
 
     public function deleteBook($bookID)
     {
-        // Prepare the query to delete the book
         $query = "DELETE FROM books WHERE idbooks = :bookID";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(":bookID", $bookID);
@@ -46,7 +43,6 @@ $books = [];
 // Check if the form is submitted
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
     $bookID = $_POST['submit'];
-    // Call the deleteBook method to delete the book
     $deleteResult = $bookArchiveLogic->deleteBook($bookID);
     if ($deleteResult) {
         $message = "Book successfully deleted.";
@@ -66,7 +62,7 @@ if (isset($_POST['search']) && isset($_POST['keyword'])) {
 
 <?php
 if (isset($searchResults) && !empty($searchResults)) {
-    // Display search results
+
     foreach ($searchResults as $book) {
         echo "
         <div class='card text-bg-dark' style='max-width: 19rem;'>

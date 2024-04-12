@@ -13,7 +13,7 @@ class SearchBooksLogic
     {
         $query = "SELECT * FROM books WHERE nameAuthor LIKE :keyword OR bookName LIKE :keyword";
         $stmt = $this->conn->prepare($query);
-        $keyword = "%$keyword%"; // Add wildcards to search for partial matches
+        $keyword = "%$keyword%"; // It also searches partial matches
         $stmt->bindParam(":keyword", $keyword);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -23,7 +23,6 @@ class SearchBooksLogic
 if (isset($_POST['search'])) {
     $keyword = strip_tags($_POST["keyword"]);
 
-    // Create instance of SearchBooksLogic
     $searchBooksLogic = new SearchBooksLogic($conn);
     $searchResults = $searchBooksLogic->searchBooks($keyword);
 } else {
